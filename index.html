@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WebQuest: El poder del color en las interfaces</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F9FA;
+    --text:#333;
+    --muted:#555;
+    --primary:#1976D2; /* secundario 30% */
+    --accent:#FF7043;  /* acento 10% */
+    --card:#fff;
+    --border:#e4e6eb;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+    line-height:1.5;
+  }
+  header.hero{
+    background:linear-gradient(120deg,var(--primary),#3f51b5);
+    color:#fff;padding:56px 24px 40px;border-bottom:4px solid rgba(255,255,255,.15);
+    text-align:center;
+  }
+  .title{font-family:Montserrat, sans-serif;font-size:clamp(24px,3vw,36px);margin:0 0 8px}
+  .subtitle{opacity:.9;margin:0 auto 20px;max-width:780px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+       padding:12px 20px;border-radius:12px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+  nav.top{
+    position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);
+    display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 12px
+  }
+  nav.top a{color:var(--primary);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px}
+  nav.top a:hover{background:#eef3ff}
+  main{max-width:1100px;margin:28px auto;padding:0 16px}
+  section{margin:28px 0;padding:0}
+  h2{font-family:Montserrat, sans-serif;font-size:clamp(20px,2.4vw,28px);margin:0 0 12px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.04);margin-top:10px
+  }
+  .grid{display:grid;gap:16px}
+  @media(min-width:880px){ .grid-2{grid-template-columns:1.2fr .8fr} .grid-3{grid-template-columns:repeat(3,1fr)} }
+  .list-clean{margin:8px 0 0 0;padding:0 0 0 18px}
+  .badge{display:inline-block;background:#eef3ff;color:var(--primary);padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}
+  .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--primary);font-weight:700}
+  .btn.primary{background:var(--primary);color:#fff;border-color:transparent}
+  .btn.accent{background:var(--accent);color:#fff;border-color:transparent}
+  .muted{color:var(--muted)}
+  .accordion .item{border-top:1px dashed var(--border)}
+  .accordion summary{cursor:pointer;padding:10px 0;font-weight:700;color:#1f2a44}
+  .accordion summary::-webkit-details-marker{display:none}
+  .accordion .content{padding:0 0 12px 0;color:var(--muted)}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:#fff}
+  .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+       font-size:12px;background:#f1f3f4;border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+  .table{width:100%;border-collapse:collapse}
+  .table th,.table td{border:1px solid var(--border);padding:10px;text-align:left}
+  .table th{background:#f6f8ff}
+  .note{background:#fff8e1;border-left:4px solid #ffb74d;padding:10px;border-radius:10px}
+  footer{padding:24px;text-align:center;color:#777}
+  /* Interactive 60/30/10 preview */
+  .preview-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--border);display:grid;grid-template-rows:60% 30% 10%;height:260px}
+  .preview-60{background:var(--primary)}
+  .preview-30{background:#111;color:#fff;display:grid;place-items:center}
+  .preview-10{background:var(--accent)}
+  .swatches{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .swatch{width:36px;height:36px;border-radius:8px;border:1px solid var(--border)}
+  .flex{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .field label{font-size:12px;color:#666;display:block;margin-bottom:4px}
+  .field input[type="color"]{width:56px;height:36px;border:none;background:none;padding:0}
+  .hint{font-size:12px;color:#777}
+  .quote{font-family: "Merriweather", serif;font-style:italic;color:#1f2a44;font-size:20px;margin:4px 0 10px}
+</style>
+</head>
+<body>
+
+<header class="hero" id="inicio">
+  <h1 class="title">WebQuest · El poder del color en las interfaces</h1>
+  <p class="subtitle">Descubre cómo el color influye en la experiencia del usuario y aprende a aplicarlo en el diseño de interfaces.</p>
+  <a class="cta" href="#introduccion">👉 Empezar la WebQuest</a>
+</header>
+
+<nav class="top">
+  <a href="#introduccion">📖 Introducción</a>
+  <a href="#tarea">🎯 Tarea</a>
+  <a href="#proceso">⚙️ Proceso</a>
+  <a href="#recursos">🌍 Recursos</a>
+  <a href="#evaluacion">✅ Evaluación</a>
+  <a href="#guia">👩‍🏫 Guía Docente</a>
+  <a href="#conclusion">🏁 Conclusión</a>
+</nav>
+
+<main>
+
+<section id="introduccion">
+  <h2>📖 1. Introducción</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <p>¿Por qué <strong>Spotify</strong> es verde, <strong>Netflix</strong> rojo y <strong>Facebook</strong> azul? El color comunica, guía la atención y condiciona la usabilidad. En esta WebQuest serás diseñador/a de interfaces y crearás la propuesta visual de una app ficticia aplicando principios de psicología del color, armonías y proporciones cromáticas.</p>
+      <div class="note">Actividad pensada para <strong>CFGS DAM — Módulo: Desarrollo de Interfaces</strong>.</div>
+      <p class="muted">Duración estimada: 3–4 sesiones.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">🎬 Calentamiento</h3>
+      <ul class="list-clean">
+        <li>Ve un vídeo breve sobre <em>psicología del color</em> (inserta tu enlace de YouTube aquí).</li>
+        <li>Responde a este mini‑cuestionario inicial:</li>
+      </ul>
+      <!-- Reemplaza el src del iframe con tu Google Forms -->
+      <div class="card" style="padding:0">
+        <!-- REPLACE_FORM_ID: Sustituye FORM_ID por el ID real de tu Google Forms -->
+<iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" title="Cuestionario inicial" style="width:100%;height:300px;border:0;border-radius:12px"></iframe>
+      </div>
+      <p class="hint">👉 En Google Sites: Insertar &gt; Incrustar &gt; Pega la URL del Forms.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tarea">
+  <h2>🎯 2. Tarea</h2>
+  <div class="card grid grid-2">
+    <div>
+      <p>En equipos, diseñad un <strong>mockup digital</strong> de una app ficticia y redactad un <strong>informe (máx. 2 páginas)</strong> justificando las decisiones cromáticas.</p>
+      <h3>Entregables</h3>
+      <ul class="list-clean">
+        <li>Mockup en <strong>Figma / Adobe XD / Canva</strong>.</li>
+        <li>Informe justificativo con: psicología del color, círculo cromático y armonías, regla <span class="kbd">60/30/10</span> y <em>degradados</em>.</li>
+      </ul>
+      <a class="btn accent" href="#proceso">Ver pasos</a>
+    </div>
+    <div>
+      <h3 style="margin-top:0">🧭 Flujo del proyecto</h3>
+      <ol class="list-clean">
+        <li>Explora material de la unidad.</li>
+        <li>Analiza referentes.</li>
+        <li>Define público y propósito.</li>
+        <li>Elige paleta y proporciones.</li>
+        <li>Prototipa y justifica.</li>
+      </ol>
+      <!-- Infografía opcional (Canva/Genially) -->
+      <div class="card" style="padding:0">
+        <!-- REPLACE_CANVA_ID: Sustituye CANVA_ID por el ID real de tu diseño en Canva/Genially -->
+<iframe src="https://www.canva.com/design/CANVA_ID/view?embed" title="Infografía del flujo" style="width:100%;height:240px;border:0;border-radius:12px"></iframe>
+      </div>
+    </div>
+  </div>
+
+<!-- === Tabla de apps ficticias con 3ª columna oculta hasta clic (Sección Tarea) === -->
+<section id="apps-sugeridas" style="margin-top:18px">
+  <style>
+    :root{ --apps-border:#e4e6eb; --apps-text:#1f2a44; --apps-muted:#5a6473; --apps-primary:#1976D2; }
+    .apps-wrap{background:#fff;border:1px solid var(--apps-border);border-radius:16px;padding:16px;box-shadow:0 6px 16px rgba(0,0,0,.04)}
+    .apps-title{margin:.2rem 0 .6rem;font:600 1.1rem/1.2 Montserrat,system-ui}
+    .apps-note{margin:.2rem 0 1rem;color:var(--apps-muted);font:400 .9rem/1.4 Roboto,system-ui}
+    .reveal-table{width:100%;border-collapse:separate;border-spacing:0}
+    .reveal-table th,.reveal-table td{border-top:1px solid var(--apps-border);padding:12px 10px;text-align:left;vertical-align:top}
+    .reveal-table thead th{background:#f6f8ff;font:600 .95rem/1.2 Roboto,system-ui;color:var(--apps-text);border-top:none}
+    .reveal-table tr:first-child td{border-top:none}
+    .app-name{font-weight:700;color:var(--apps-text)}
+    .app-desc{color:var(--apps-muted)}
+    .reveal-cell{position:relative}
+    .reveal-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border:1px solid var(--apps-border);border-radius:10px;
+      background:#fff;color:var(--apps-primary);font:700 .9rem/1 Roboto,system-ui;
+      cursor:pointer;user-select:none;transition:box-shadow .2s ease, transform .05s ease;
+    }
+    .reveal-btn:focus{outline:3px solid #b9d6ff;outline-offset:2px}
+    .reveal-btn:active{transform:scale(.98)}
+    .chev{transition:transform .2s ease}
+    .reveal-panel{display:none;margin-top:10px;padding:10px;border:1px dashed var(--apps-border);border-radius:10px;background:#F8F9FA;color:#243042}
+    .reveal-panel.open{display:block}
+    .pill{display:inline-flex;align-items:center;gap:8px;margin:6px 8px 0 0;padding:8px 10px;border-radius:12px;border:1px solid var(--apps-border);background:#fff}
+    .swatch{width:18px;height:18px;border-radius:6px;border:1px solid var(--apps-border)}
+    @media (max-width:760px){
+      .reveal-table thead{display:none}
+      .reveal-table tr{display:block;border:1px solid var(--apps-border);border-radius:12px;margin:10px 0;padding:10px}
+      .reveal-table td{display:block;border:none;padding:6px 0}
+      .reveal-table td[data-label]::before{content:attr(data-label) " · ";font-weight:600;color:#42506a;margin-right:6px}
+    }
+  </style>
+
+  <div class="apps-wrap">
+    <h3 class="apps-title">📊 Apps ficticias sugeridas (elige una o inspira tu propuesta)</h3>
+    <p class="apps-note">Haz clic en <strong>“Ver colores recomendados”</strong> para desplegar la propuesta cromática de cada app.</p>
+
+    <table class="reveal-table" role="table" aria-label="Tabla de apps ficticias">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Colores recomendados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="app-name" data-label="Nombre">MindZen</td>
+          <td class="app-desc" data-label="Descripción">App de meditación y mindfulness.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#6BBF92"></span><span>Verde suave (calma/naturaleza)</span></div>
+              <div class="pill"><span class="swatch" style="background:#7EC8E3"></span><span>Azul suave (serenidad/confianza)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">NutriTrack</td>
+          <td class="app-desc" data-label="Descripción">Seguimiento de nutrición y hábitos.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#2E7D32"></span><span>Verde (salud/frescura)</span></div>
+              <div class="pill"><span class="swatch" style="background:#FF8A65"></span><span>Naranja (energía/vitalidad)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">StudyFlow</td>
+          <td class="app-desc" data-label="Descripción">Organización de estudio y horarios.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#1976D2"></span><span>Azul (concentración/claridad)</span></div>
+              <div class="pill"><span class="swatch" style="background:#FFD54F"></span><span>Amarillo (motivación/optimismo)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">TaskHero</td>
+          <td class="app-desc" data-label="Descripción">Gestor de tareas gamificado.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#6A1B9A"></span><span>Morado (creatividad)</span></div>
+              <div class="pill"><span class="swatch" style="background:#FB8C00"></span><span>Naranja (dinamismo/acción)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">GameHub</td>
+          <td class="app-desc" data-label="Descripción">Portal de juegos indie.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#4527A0"></span><span>Morado oscuro (atmósfera)</span></div>
+              <div class="pill"><span class="swatch" style="background:#00E5FF"></span><span>Neón cian (energía/modernidad)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">CineMatch</td>
+          <td class="app-desc" data-label="Descripción">Recomendador de películas.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#E53935"></span><span>Rojo (emoción/impacto)</span></div>
+              <div class="pill"><span class="swatch" style="background:#111111"></span><span>Negro (sofisticación)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">EcoSteps</td>
+          <td class="app-desc" data-label="Descripción">Huella de carbono diaria.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#2E7D32"></span><span>Verde (naturaleza/ética)</span></div>
+              <div class="pill"><span class="swatch" style="background:#0288D1"></span><span>Azul (aire/tecnología limpia)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">RecyApp</td>
+          <td class="app-desc" data-label="Descripción">Juego educativo de reciclaje.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#1976D2"></span><span>Azul (papel)</span></div>
+              <div class="pill"><span class="swatch" style="background:#43A047"></span><span>Verde (vidrio)</span></div>
+              <div class="pill"><span class="swatch" style="background:#FBC02D"></span><span>Amarillo (envases)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">SaveUp</td>
+          <td class="app-desc" data-label="Descripción">Ahorro automático y metas.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#2E7D32"></span><span>Verde (estabilidad/éxito)</span></div>
+              <div class="pill"><span class="swatch" style="background:#90A4AE"></span><span>Gris (neutralidad/claridad)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">CryptoSafe</td>
+          <td class="app-desc" data-label="Descripción">Seguimiento de criptoactivos.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#111111"></span><span>Negro (seguridad)</span></div>
+              <div class="pill"><span class="swatch" style="background:#CDA434"></span><span>Dorado (valor/prestigio)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">RideEasy</td>
+          <td class="app-desc" data-label="Descripción">Car/bike sharing ecológico.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#1976D2"></span><span>Azul (confianza/información)</span></div>
+              <div class="pill"><span class="swatch" style="background:#43A047"></span><span>Verde (sostenibilidad)</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="app-name" data-label="Nombre">MetroGo</td>
+          <td class="app-desc" data-label="Descripción">Tiempos de transporte urbano.</td>
+          <td class="reveal-cell" data-label="Colores">
+            <button class="reveal-btn" aria-expanded="false"><span class="chev">▸</span> Ver colores recomendados</button>
+            <div class="reveal-panel">
+              <div class="pill"><span class="swatch" style="background:#FFD54F"></span><span>Amarillo (alertas/tiempos)</span></div>
+              <div class="pill"><span class="swatch" style="background:#1976D2"></span><span>Azul (legibilidad/claridad)</span></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    (function(){
+      const rows = document.querySelectorAll('#apps-sugeridas .reveal-cell');
+      rows.forEach(cell=>{
+        const btn = cell.querySelector('.reveal-btn');
+        const panel = cell.querySelector('.reveal-panel');
+        const chev = cell.querySelector('.chev');
+        function toggle(){
+          const open = panel.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+          if(chev) chev.style.transform = open ? 'rotate(90deg)' : 'rotate(0deg)';
+          btn.innerHTML = (open ? '▾ Ocultar colores' : '<span class="chev">▸</span> Ver colores recomendados');
+        }
+        btn.addEventListener('click', toggle);
+        btn.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+        });
+      });
+    })();
+  </script>
+</section>
+
+
+</section>
+
+<section id="proceso">
+  <h2>⚙️ 3. Proceso</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="accordion">
+        <details class="item" open>
+          <summary>1. Leer el material de la unidad</summary>
+          <div class="content">Revisa los apuntes de <em>Color en Interfaces</em> (psicología del color, círculo cromático, paletas, degradados).</div>
+        </details>
+        <details class="item">
+          <summary>2. Analizar ejemplos de apps</summary>
+          <div class="content">Observa cómo marcas como Spotify, Netflix, BBVA o Instagram usan el color para guiar acciones y transmitir valores.</div>
+        </details>
+        <details class="item">
+          <summary>3. Definir público y propósito</summary>
+          <div class="content">Describe usuarios, contexto de uso y objetivos de la app. Esto determinará el <em>tono emocional</em> del color.</div>
+        </details>
+        <details class="item">
+          <summary>4. Seleccionar paleta de colores</summary>
+          <div class="content">Explora armonías (monocromática, análoga, complementaria, tríada) y prepara variantes de valor/saturación.</div>
+        </details>
+        <details class="item">
+          <summary>5. Aplicar la regla 60/30/10</summary>
+          <div class="content">Decide color dominante (fondo/áreas extensas), complementario (texto/elementos) y acento (llamadas a la acción).</div>
+        </details>
+        <details class="item">
+          <summary>6. Incluir un degradado</summary>
+          <div class="content">Úsalo con transiciones suaves —preferiblemente análogas— para banners o botones clave.</div>
+        </details>
+        <details class="item">
+          <summary>7. Realizar el mockup</summary>
+          <div class="content">Prototipa pantallas clave: inicio, catálogo/lista, detalle, acción principal.</div>
+        </details>
+        <details class="item">
+          <summary>8. Redactar el informe</summary>
+          <div class="content">Justifica tus decisiones con referencias a usabilidad y accesibilidad (contraste, daltonismo, consistencia).</div>
+        </details>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">🎨 Laboratorio de color (interactivo)</h3>
+      <p class="muted">Prueba tu paleta 60/30/10 y observa el impacto en una vista previa.</p>
+      <div class="flex">
+        <div class="field">
+          <label>Color dominante (60%)</label>
+          <input type="color" id="cPrimary" value="#1976D2" />
+        </div>
+        <div class="field">
+          <label>Color de acento (10%)</label>
+          <input type="color" id="cAccent" value="#FF7043" />
+        </div>
+        <div class="field">
+          <label>Color neutro</label>
+          <input type="color" id="cNeutral" value="#111111" />
+        </div>
+      </div>
+      <div class="preview-wrap" style="margin-top:10px">
+        <div class="preview-60"></div>
+        <div class="preview-30">Texto / tarjetas</div>
+        <div class="preview-10"></div>
+      </div>
+      <div class="swatches" style="margin-top:10px">
+        <div class="pill"><span class="swatch" id="s60"></span><span>60%</span></div>
+        <div class="pill"><span class="swatch" id="s30"></span><span>30%</span></div>
+        <div class="pill"><span class="swatch" id="s10"></span><span>10%</span></div>
+      </div>
+      <p class="hint">💡 Puedes seguir usando Adobe Color / Coolors, pero este mini‑preview funciona dentro de Google Sites.</p>
+      <hr style="margin:16px 0;border:none;border-top:1px dashed var(--border)">
+      <h3 style="margin-top:0">📄 Plantilla de informe</h3>
+      <!-- REPLACE_DOC_ID: Sustituye DOC_ID por el ID real de tu documento -->
+<a class="btn" href="https://docs.google.com/document/d/DOC_ID/edit" target="_blank" rel="noopener">Abrir plantilla en Google Docs</a>
+    </div>
+  </div>
+</section>
+
+<section id="recursos">
+  <h2>🌍 4. Recursos</h2>
+  <div class="card grid grid-3">
+    <div>
+      <h3 style="margin-top:0">Herramientas</h3>
+      <ul class="list-clean">
+        <li><a href="https://color.adobe.com/es/" target="_blank" rel="noopener">Adobe Color</a></li>
+        <li><a href="https://coolors.co/" target="_blank" rel="noopener">Coolors</a></li>
+        <li><a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a></li>
+        <li><a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a></li>
+      </ul>
+      <p class="hint">Nota: algunos sitios externos pueden bloquear la incrustación. Ábrelos en nueva pestaña si no se previsualizan.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Ejemplos de interfaces</h3>
+      <ul class="list-clean">
+        <li>Netflix — rojo para destacar acción/emoción.</li>
+        <li>Spotify — verde para dinamismo/afabilidad.</li>
+        <li>BBVA — gama azul para confianza y estabilidad.</li>
+        <li>Instagram — degradados como identidad visual.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Apuntes de la unidad</h3>
+      <p>Descarga los materiales en PDF/Word:</p>
+      <!-- REPLACE_FILE_ID: Sustituye FILE_ID por el ID real de tu archivo en Drive (PDF/Word) -->
+<a class="btn primary" href="https://drive.google.com/uc?export=download&id=FILE_ID" target="_blank" rel="noopener">📥 Descargar Apuntes</a>
+    </div>
+  </div>
+</section>
+
+<section id="evaluacion">
+  <h2>✅ 5. Evaluación</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Rúbrica (10 puntos)</h3>
+      <table class="table">
+        <thead>
+          <tr><th>Criterio</th><th>Puntuación</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Psicología del color y justificación</td><td>0–2</td></tr>
+          <tr><td>Círculo cromático y armonías</td><td>0–2</td></tr>
+          <tr><td>Regla 60/30/10 y uso de degradados</td><td>0–2</td></tr>
+          <tr><td>Creatividad y coherencia visual</td><td>0–2</td></tr>
+          <tr><td>Informe y presentación</td><td>0–2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Autoevaluación y entrega</h3>
+      <p>Completa la autoevaluación y sube tu proyecto final.</p>
+      <!-- Reemplaza el src del iframe con tu Google Forms de autoevaluación -->
+      <!-- REPLACE_FORM_ID_AUTO: Sustituye FORM_ID_AUTO por el ID real del Forms de autoevaluación -->
+<iframe src="https://docs.google.com/forms/d/e/FORM_ID_AUTO/viewform?embedded=true" title="Autoevaluación" style="width:100%;height:260px;border:0;border-radius:12px"></iframe>
+      <div style="margin-top:10px">
+        <!-- REPLACE_DRIVE_FOLDER_ID: Sustituye FOLDER_ID por el ID real de tu carpeta de Drive -->
+<a class="btn accent" href="https://drive.google.com/drive/folders/FOLDER_ID" target="_blank" rel="noopener">📤 Subir mi entrega (Drive)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guia">
+  <h2>👩‍🏫 6. Guía Docente</h2>
+  <div class="card">
+    <div class="grid grid-3">
+      <div>
+        <h3 style="margin-top:0">Objetivos didácticos</h3>
+        <ul class="list-clean">
+          <li>Aplicar psicología del color en UX/UI.</li>
+          <li>Seleccionar paletas coherentes y accesibles.</li>
+          <li>Usar herramientas digitales de prototipado.</li>
+          <li>Desarrollar trabajo en equipo y comunicación.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Currículo (CFGS DAM)</h3>
+        <ul class="list-clean">
+          <li><strong>RA1</strong>: diseñar IU aplicando usabilidad.</li>
+          <li><strong>RA2</strong>: crear IU con librerías/herramientas.</li>
+          <li><strong>RA3</strong>: accesibilidad y diseño universal.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Metodología</h3>
+        <ul class="list-clean">
+          <li>ABP y aprendizaje cooperativo (equipos 3–4).</li>
+          <li>Evaluación formativa con rúbrica y co/auto‑evaluación.</li>
+          <li>Productos: mockup + informe breve.</li>
+        </ul>
+      </div>
+    </div>
+    <hr style="margin:16px 0;border:none;border-top:1px dashed var(--border)">
+    <div class="grid grid-2">
+      <div>
+        <h3 style="margin-top:0">Consejos docentes</h3>
+        <ul class="list-clean">
+          <li>Comienza con referentes reales y preguntas guía.</li>
+          <li>Revisa contraste y legibilidad (daltonismo).</li>
+          <li>Prioriza paletas simples y consistentes.</li>
+          <li>Fomenta la justificación de decisiones visuales.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Normativa y evaluación</h3>
+        <p>Vinculación con el módulo <em>Desarrollo de Interfaces</em> del CFGS DAM (normativa estatal y autonómica aplicable). Relación directa con RA1‑RA3 y criterios de evaluación de diseño, usabilidad y accesibilidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>🏁 7. Conclusión</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <p class="quote">“El color es un poder que influye directamente en el alma.” — Kandinsky</p>
+      <p>El color comunica tanto como la funcionalidad. Una elección cromática consciente mejora la experiencia del usuario y refuerza la identidad de la aplicación.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Muro de reflexiones</h3>
+      <!-- Reemplaza con tu enlace de Padlet/Jamboard -->
+      <!-- REPLACE_PADLET: Sustituye PADLET_ID por el ID real de tu muro -->
+<iframe src="https://padlet.com/embed/PADLET_ID" title="Muro colaborativo" style="width:100%;height:240px;border:0;border-radius:12px"></iframe>
+      <p class="hint">Si el servicio no permite incrustación, coloca un botón que abra el muro en nueva pestaña.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="muted">WebQuest · Color en Interfaces — CFGS DAM · Diseñada para incrustarse en Google Sites</div>
+</footer>
+
+<script>
+// Interactive palette 60/30/10
+const cPrimary = document.getElementById('cPrimary');
+const cAccent  = document.getElementById('cAccent');
+const cNeutral = document.getElementById('cNeutral');
+const preview60 = document.querySelector('.preview-60');
+const preview30 = document.querySelector('.preview-30');
+const preview10 = document.querySelector('.preview-10');
+const s60 = document.getElementById('s60');
+const s30 = document.getElementById('s30');
+const s10 = document.getElementById('s10');
+
+function applyColors(){
+  const p = cPrimary.value;
+  const a = cAccent.value;
+  const n = cNeutral.value;
+  preview60.style.background = p;
+  preview30.style.background = n;
+  preview10.style.background = a;
+  s60.style.background = p;
+  s30.style.background = n;
+  s10.style.background = a;
+}
+[cPrimary,cAccent,cNeutral].forEach(el=>el.addEventListener('input',applyColors));
+applyColors();
+</script>
+
+</body>
+</html>
