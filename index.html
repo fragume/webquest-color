@@ -45,7 +45,7 @@
     padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.04);margin-top:10px
   }
   .grid{display:grid;gap:16px}
-  @media(min-width:880px){ .grid-2{grid-template-columns:1.2fr .8fr} .grid-3{grid-template-columns:repeat(3,1fr)} }
+  @media(min-width:880px){ .grid-2{grid-template-columns:1.2fr .8fr} .grid-3{grid-template-columns:repeat(3,1fr)}  .grid-2-rightwide{grid-template-columns:0.8fr 1.2fr} }
   .list-clean{margin:8px 0 0 0;padding:0 0 0 18px}
   .badge{display:inline-block;background:#eef3ff;color:var(--primary);padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}
   .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--primary);font-weight:700}
@@ -100,24 +100,31 @@
 
 <section id="introduccion">
   <h2>📖 1. Introducción</h2>
-  <div class="grid grid-2">
+  <div class="grid grid-2-rightwide">
     <div class="card">
       <p>¿Por qué <strong>Spotify</strong> es verde, <strong>Netflix</strong> rojo y <strong>Facebook</strong> azul? El color comunica, guía la atención y condiciona la usabilidad. En esta WebQuest serás diseñador/a de interfaces y crearás la propuesta visual de una app ficticia aplicando principios de psicología del color, armonías y proporciones cromáticas.</p>
       <div class="note">Actividad pensada para <strong>CFGS DAM — Módulo: Desarrollo de Interfaces</strong>.</div>
-      <p class="muted">Duración estimada: 3–4 sesiones.</p>
+      <p class="muted">Duración estimada: 2 sesiones.</p>
     </div>
     <div class="card">
       <h3 style="margin-top:0">🎬 Calentamiento</h3>
       <ul class="list-clean">
-        <li>Ve un vídeo breve sobre <em>psicología del color</em>https://www.youtube.com/watch?v=q7IuRT3vmVQ</li>
+        <li>
+          Ve un vídeo breve sobre <em>psicología del color</em>
+          <a href="https://www.youtube.com/watch?v=q7IuRT3vmVQ" target="_blank" rel="noopener">
+            https://www.youtube.com/watch?v=q7IuRT3vmVQ
+          </a>
+        </li>
         <li>Responde a este mini‑cuestionario inicial:</li>
+        <div style="text-align:center; margin-top:10px;">
+        <a class="btn accent" href="https://docs.google.com/forms/d/e/1FAIpQLSc84ZIbwTcO7-lG04cco0nBpAhWrMiLkCwBN99opqNzMMbFKw/viewform" target="_blank" rel="noopener">📝 Abrir cuestionario en nueva pestaña</a>
+      </div>
       </ul>
       <!-- Reemplaza el src del iframe con tu Google Forms -->
       <div class="card" style="padding:0">
         <!-- REPLACE_FORM_ID: Sustituye FORM_ID por el ID real de tu Google Forms -->
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc84ZIbwTcO7-lG04cco0nBpAhWrMiLkCwBN99opqNzMMbFKw/viewform?embedded=true" title="Cuestionario inicial" style="width:100%;height:300px;border:0;border-radius:12px"></iframe>
       </div>
-      <p class="hint">👉 En Google Sites: Insertar &gt; Incrustar &gt; Pega la URL del Forms.</p>
     </div>
   </div>
 </section>
@@ -441,7 +448,6 @@
         <li><a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a></li>
         <li><a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a></li>
       </ul>
-      <p class="hint">Nota: algunos sitios externos pueden bloquear la incrustación. Ábrelos en nueva pestaña si no se previsualizan.</p>
     </div>
     <div>
       <h3 style="margin-top:0">Ejemplos de interfaces</h3>
@@ -463,7 +469,7 @@
 
 <section id="evaluacion">
   <h2>✅ 5. Evaluación</h2>
-  <div class="grid grid-2">
+  <div class="grid grid-2-rightwide">
     <div class="card">
       <h3 style="margin-top:0">Rúbrica (10 puntos)</h3>
       <table class="table">
@@ -484,11 +490,12 @@
       <p>Completa la autoevaluación y sube tu proyecto final.</p>
       <!-- Reemplaza el src del iframe con tu Google Forms de autoevaluación -->
       <!-- REPLACE_FORM_ID_AUTO: Sustituye FORM_ID_AUTO por el ID real del Forms de autoevaluación -->
-<iframe src="https://docs.google.com/forms/d/e/FORM_ID_AUTO/viewform?embedded=true" title="Autoevaluación" style="width:100%;height:260px;border:0;border-radius:12px"></iframe>
-      <div style="margin-top:10px">
-        <!-- REPLACE_DRIVE_FOLDER_ID: Sustituye FOLDER_ID por el ID real de tu carpeta de Drive -->
-<a class="btn accent" href="https://drive.google.com/drive/folders/FOLDER_ID" target="_blank" rel="noopener">📤 Subir mi entrega (Drive)</a>
-      </div>
+       <div style="text-align:center; margin-top:10px;">
+          <a class="btn accent" href="https://docs.google.com/forms/d/e/FORM_ID_AUTO/viewform" target="_blank" rel="noopener">
+            📝 Abrir autoevaluación en nueva pestaña
+          </a>
+        </div>
+       <iframe src="https://docs.google.com/forms/d/e/FORM_ID_AUTO/viewform?embedded=true" title="Autoevaluación" style="width:100%;height:260px;border:0;border-radius:12px"></iframe>
     </div>
   </div>
 </section>
@@ -517,26 +524,10 @@
       <div>
         <h3 style="margin-top:0">Metodología</h3>
         <ul class="list-clean">
-          <li>ABP y aprendizaje cooperativo (equipos 3–4).</li>
-          <li>Evaluación formativa con rúbrica y co/auto‑evaluación.</li>
+          <li>ABP, autodescubrimiento y aprendizaje cooperativo.</li>
+          <li>Evaluación formativa con rúbrica y auto‑evaluación.</li>
           <li>Productos: mockup + informe breve.</li>
         </ul>
-      </div>
-    </div>
-    <hr style="margin:16px 0;border:none;border-top:1px dashed var(--border)">
-    <div class="grid grid-2">
-      <div>
-        <h3 style="margin-top:0">Consejos docentes</h3>
-        <ul class="list-clean">
-          <li>Comienza con referentes reales y preguntas guía.</li>
-          <li>Revisa contraste y legibilidad (daltonismo).</li>
-          <li>Prioriza paletas simples y consistentes.</li>
-          <li>Fomenta la justificación de decisiones visuales.</li>
-        </ul>
-      </div>
-      <div>
-        <h3 style="margin-top:0">Normativa y evaluación</h3>
-        <p>Vinculación con el módulo <em>Desarrollo de Interfaces</em> del CFGS DAM (normativa estatal y autonómica aplicable). Relación directa con RA1‑RA3 y criterios de evaluación de diseño, usabilidad y accesibilidad.</p>
       </div>
     </div>
   </div>
