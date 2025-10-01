@@ -1,0 +1,121 @@
+{
+  "title": "Cuestionario: Introducción a la psicología del color",
+  "description": "Mini cuestionario para activar conocimientos previos y comprobar la comprensión del el vídeo.",
+  "isQuiz": true,
+  "videoUrl": "https://www.youtube.com/watch?v=q7IuRT3vmVQ",
+  "sections": [
+    {
+      "title": "Bloque 1 · Conocimientos previos y reflexión",
+      "items": [
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "¿Habías oído antes hablar de la “psicología del color”?",
+          "options": [
+            "Sí, lo conocía bien",
+            "Lo había oído, pero no sabía qué significaba",
+            "No, nunca lo había escuchado"
+          ],
+          "required": true,
+          "points": 0
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "Cuando piensas en el color rojo, ¿qué emociones o ideas te transmite?",
+          "options": [
+            "Peligro / alerta",
+            "Pasión / amor",
+            "Fuerza / energía",
+            "Otro (especifica en la siguiente pregunta)"
+          ],
+          "required": true,
+          "points": 0
+        },
+        {
+          "type": "SHORT_ANSWER",
+          "title": "Si has respondido 'Otro', escribe aquí qué te transmite el color rojo:",
+          "required": false,
+          "points": 0
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "Antes de ver el vídeo, ¿qué color habrías elegido para una app de salud o bienestar?",
+          "options": [
+            "Verde",
+            "Azul",
+            "Naranja",
+            "Otro (especifica en la siguiente pregunta)"
+          ],
+          "required": true,
+          "points": 0
+        },
+        {
+          "type": "SHORT_ANSWER",
+          "title": "Si has respondido 'Otro', indica qué color y por qué:",
+          "required": false,
+          "points": 0
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "¿Crees que el color puede influir en la confianza que nos genera una marca o app?",
+          "options": [
+            "Sí, mucho",
+            "Algo, pero no decisivo",
+            "No lo creo"
+          ],
+          "required": true,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "title": "Bloque 2 · Comprensión del vídeo",
+      "items": [
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "Según el vídeo, el color azul suele transmitir…",
+          "options": [
+            "Calma, confianza y seguridad",
+            "Peligro y advertencia",
+            "Exclusividad y lujo",
+            "Energía y dinamismo"
+          ],
+          "correctIndex": 0,
+          "required": true,
+          "points": 1
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "El color amarillo se asocia principalmente con…",
+          "options": [
+            "Tristeza y apatía",
+            "Alegría y optimismo",
+            "Tecnología y precisión",
+            "Naturaleza y ecología"
+          ],
+          "correctIndex": 1,
+          "required": true,
+          "points": 1
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "title": "El vídeo explica que el negro se usa en marcas como Chanel o Nike porque comunica…",
+          "options": [
+            "Sofisticación y elegancia",
+            "Peligro",
+            "Naturalidad",
+            "Relajación"
+          ],
+          "correctIndex": 0,
+          "required": true,
+          "points": 1
+        },
+        {
+          "type": "PARAGRAPH",
+          "title": "Tras ver el vídeo, ¿qué color elegirías para una app de deporte y por qué?",
+          "required": false,
+          "points": 0
+        }
+      ]
+    }
+  ]
+}
